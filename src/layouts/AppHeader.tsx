@@ -1,6 +1,5 @@
 "use client";
 
-import { HeaderAccount } from "@/components/HeaderAccount";
 import { IAdminResponse } from "@/models/adminModel";
 import { Button } from "antd";
 import { Header } from "antd/es/layout/layout";
@@ -25,11 +24,9 @@ export function AppHeader(props: IAppHeaderProps) {
   }, []);
 
   return (
-    <Header className="font-nunito flex h-24 justify-between !bg-primary-white px-10">
-      <h1 className="flex h-full items-center text-4xl font-bold">Overview</h1>
+    <Header className="flex h-24 justify-between !bg-primary-white px-10 font-nunito">
+      <h1 className="flex h-full items-center text-4xl font-bold">Tổng quan</h1>
       <div className="flex h-full items-center px-4">
-        <HeaderAccount />
-
         <Image
           className="ml-10"
           width={24}
@@ -40,8 +37,8 @@ export function AppHeader(props: IAppHeaderProps) {
 
         <p className="ml-2 text-base">{profile.fullname || ""}</p>
 
-        <Button danger className="font-nunito ml-4" onClick={handleLogout}>
-          Logout
+        <Button danger className="ml-4 font-nunito" onClick={handleLogout}>
+          Đăng xuất
         </Button>
       </div>
     </Header>

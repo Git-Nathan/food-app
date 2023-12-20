@@ -63,7 +63,7 @@ export function ProductInputForm({
 
         const options = data.map((item: IStore) => ({
           value: item.store_id,
-          label: item.store_id.toString(),
+          label: item.store_id?.toString(),
         }));
 
         setStoreIdOptions(options);
@@ -78,31 +78,40 @@ export function ProductInputForm({
   return (
     <Form
       name="product"
-      labelCol={{ span: 8 }}
-      style={{ maxWidth: 600 }}
+      labelCol={{ span: 10 }}
+      style={{ maxWidth: 800 }}
       initialValues={data}
       onFinish={onFinish}
       autoComplete="off"
       className="mt-4"
     >
       <Form.Item<IProduct>
-        label="Product Name"
+        label="Tên sản phẩm"
         name="product_name"
-        rules={[{ required: true, message: "Please input product name!" }]}
+        rules={[
+          { required: true, message: "Tên sản phẩm không được để trống!" },
+        ]}
       >
         <Input allowClear />
       </Form.Item>
       <Form.Item<IProduct>
-        label="Image url"
+        label="Đường dẫn ảnh sản phẩm"
         name="avatar"
-        rules={[{ required: true, message: "Please input image url!" }]}
+        rules={[
+          {
+            required: true,
+            message: "Đường dẫn ảnh sản phẩm không được để trống!",
+          },
+        ]}
       >
         <TextArea rows={4} allowClear />
       </Form.Item>
       <Form.Item<IProduct>
-        label="Store ID"
+        label="Mã cửa hàng"
         name="store_id"
-        rules={[{ required: true, message: "Please input store id!" }]}
+        rules={[
+          { required: true, message: "Mã cửa hàng không được để trống!" },
+        ]}
       >
         <Select
           options={storeIdOptions}
@@ -111,22 +120,22 @@ export function ProductInputForm({
         />
       </Form.Item>
       <Form.Item<IProduct>
-        label="Price"
+        label="Giá tiền"
         name="price"
-        rules={[{ required: true, message: "Please input price!" }]}
+        rules={[{ required: true, message: "Giá tiền không được để trống!" }]}
       >
         <InputNumber className="w-full" suffix="VNĐ" />
       </Form.Item>
-      <Form.Item<IProduct> label="Discount" name="discount">
+      <Form.Item<IProduct> label="Giảm giá" name="discount">
         <InputNumber className="w-full" suffix="VNĐ" />
       </Form.Item>
-      <Form.Item<IProduct> label="Description" name="description">
+      <Form.Item<IProduct> label="Mô tả" name="description">
         <TextArea rows={4} allowClear />
       </Form.Item>
       <Form.Item wrapperCol={{ offset: 8 }}>
         <div className="flex justify-end">
           <Button key="back" onClick={handleCancel}>
-            Cancel
+            Huỷ bỏ
           </Button>
           <Button
             loading={isLoading}
@@ -134,7 +143,7 @@ export function ProductInputForm({
             type="primary"
             htmlType="submit"
           >
-            {!isEdit ? "Add" : "Edit"}
+            {!isEdit ? "Thêm" : "Sửa"}
           </Button>
         </div>
       </Form.Item>

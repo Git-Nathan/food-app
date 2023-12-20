@@ -19,20 +19,20 @@ export function AppSider(props: IAppSiderProps) {
           href="/products"
         >
           <DishIcon />
-          <p className="ml-8">Products</p>
+          <p className="ml-8">Sản phẩm</p>
         </NavLink>
         <NavLink
           className="m-1 mb-3 flex h-10 w-full items-center rounded-lg pl-6 pr-4 text-base text-primary-white"
           href="/stores"
         >
           <StoreIcon />
-          <p className="ml-8">Stores</p>
+          <p className="ml-8">Cửa hàng</p>
         </NavLink>
         <NavLink
           className="m-1 flex h-10 w-full items-center rounded-lg pl-6 pr-4 text-base text-primary-white"
           href="/orders"
         >
-          <OrderIcon /> <p className="ml-8">Orders</p>
+          <OrderIcon /> <p className="ml-8">Đơn hàng</p>
         </NavLink>
       </nav>
     </Sider>

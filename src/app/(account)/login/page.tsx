@@ -66,7 +66,7 @@ export default function LoginPage(props: ILoginPageProps) {
       <div className="border-blue-400 bg-white relative flex w-min -translate-y-[5vh] overflow-hidden rounded-3xl bg-primary-white shadow-2xl">
         <div className="flex w-[420px] flex-col items-center pt-20">
           <div className="mb-8 flex justify-center">
-            <h1 className="text-4xl font-bold">Login</h1>
+            <h1 className="text-4xl font-bold">Đăng nhập</h1>
           </div>
           <Form
             name="basic"
@@ -84,7 +84,7 @@ export default function LoginPage(props: ILoginPageProps) {
               <Input
                 className="font-nunito"
                 prefix={<UserIcon />}
-                placeholder="Username"
+                placeholder="Tên đăng nhập"
               />
             </Form.Item>
 
@@ -96,18 +96,18 @@ export default function LoginPage(props: ILoginPageProps) {
             >
               <Input.Password
                 prefix={<PasswordIcon />}
-                placeholder="Password"
+                placeholder="Mật khẩu"
               />
             </Form.Item>
 
             <Form.Item className="flex justify-center">
               <Button
-                className="font-nunito mt-2"
+                className="mt-2 font-nunito"
                 type="primary"
                 htmlType="submit"
                 loading={loading}
               >
-                Login now
+                Đăng nhập
               </Button>
             </Form.Item>
           </Form>
@@ -130,9 +130,6 @@ export default function LoginPage(props: ILoginPageProps) {
               alt="thunder"
               src="/icons/thunder.svg"
             />
-            <p className="ml-6 mt-6 w-[120px] text-lg font-bold  text-primary-white">
-              Very good works are waiting for you Login Now!!!
-            </p>
           </div>
         </div>
       </div>

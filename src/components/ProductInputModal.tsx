@@ -30,11 +30,11 @@ export function ProductInputModal({
           setOpenProductInputModal(true);
         }}
       >
-        {!isEdit ? "Add product" : "Edit"}
+        {!isEdit ? "Thêm sản phẩm" : "Sửa"}
       </Button>
       <Modal
         open={openProductInputModal}
-        title={!isEdit ? "Add product" : "Edit product"}
+        title={!isEdit ? "Thêm sản phẩm" : "Sửa sản phẩm"}
         onCancel={handleCancel}
         footer={false}
         destroyOnClose

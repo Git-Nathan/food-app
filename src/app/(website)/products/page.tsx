@@ -26,10 +26,11 @@ export default function HomePage() {
       dataIndex: "product_id",
       key: "product_id",
       fixed: "left",
+      align: "center",
       width: 1,
     },
     {
-      title: "Image",
+      title: "Ảnh sản phẩm",
       dataIndex: "avatar",
       key: "avatar",
       width: 1.3,
@@ -58,7 +59,7 @@ export default function HomePage() {
       },
     },
     {
-      title: "Product Name",
+      title: "Tên sản phẩm",
       dataIndex: "product_name",
       key: "product_name",
       width: 3,
@@ -67,13 +68,13 @@ export default function HomePage() {
       },
     },
     {
-      title: "Store ID",
+      title: "Mã cửa hàng",
       dataIndex: "store_id",
       key: "store_id",
-      width: 1,
+      width: 1.5,
     },
     {
-      title: "Price",
+      title: "Giá tiền",
       dataIndex: "price",
       key: "price",
       width: 1.5,
@@ -84,7 +85,7 @@ export default function HomePage() {
       },
     },
     {
-      title: "Discount",
+      title: "Giảm giá",
       dataIndex: "discount",
       key: "discount",
       width: 1.5,
@@ -95,16 +96,16 @@ export default function HomePage() {
       },
     },
     {
-      title: "Rate",
+      title: "Đánh giá",
       dataIndex: "rate",
       key: "rate",
-      width: 1.6,
+      width: 1.8,
       render(value, record, index) {
         return <Rate disabled value={value} />;
       },
     },
     {
-      title: "Description",
+      title: "Mô tả",
       dataIndex: "description",
       key: "description",
       width: 3,
@@ -113,8 +114,9 @@ export default function HomePage() {
       },
     },
     {
-      title: "Actions",
+      title: "Tuỳ chọn",
       dataIndex: "actions",
+      align: "center",
       width: 2,
       fixed: "right",
       render(value, record, index) {
@@ -122,13 +124,15 @@ export default function HomePage() {
           <div key={index}>
             <ProductInputModal isEdit data={record} />
             <Popconfirm
-              title="Sure to delete?"
+              title="Bạn có chắn muốn xoá?"
+              okText="Xoá"
+              cancelText="Hủy"
               onConfirm={() => {
                 handleDelete(record.product_id as number);
               }}
             >
               <Button className="ml-4" danger>
-                Delete
+                Xoá
               </Button>
             </Popconfirm>
           </div>
@@ -147,16 +151,16 @@ export default function HomePage() {
 
   return (
     <div className="mt-2 px-10">
-      <h2 className="text-base font-bold">Products Table</h2>
+      <h2 className="text-base font-bold">Danh sách sản phẩm</h2>
       <div className="flex w-full items-center justify-between">
-        <ProductInputModal className="font-nunito my-4" />
+        <ProductInputModal className="my-4 font-nunito" />
         <Button
           onClick={() => {
             dispatch(getAllProducts());
           }}
           className="font-nunito"
         >
-          Reload
+          Làm mới
         </Button>
       </div>
       <Table
