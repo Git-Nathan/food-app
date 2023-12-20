@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700&display=swap");
+
 * {
   margin: 0;
   padding: 0;
@@ -35,8 +37,40 @@ body {
   min-height: 100vh;
 }
 
+.truncate- {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+
+  &2 {
+    @extend .truncate-;
+    -webkit-line-clamp: 2;
+  }
+
+  &3 {
+    @extend .truncate-;
+    -webkit-line-clamp: 3;
+  }
+
+  &4 {
+    @extend .truncate-;
+    -webkit-line-clamp: 4;
+  }
+
+  &5 {
+    @extend .truncate-;
+    -webkit-line-clamp: 5;
+  }
+
+  &6 {
+    @extend .truncate-;
+    -webkit-line-clamp: 6;
+  }
+}
+
 .ant-btn-primary {
-  background-color: #1677ff !important;
+  background-color: var(--indigo) !important;
 
   &:hover {
     opacity: 0.7;
@@ -48,4 +82,52 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.sider-nav {
+  background-color: var(--indigo);
+
+  .ant-menu-item {
+    color: var(--primary-white) !important;
+    font-size: 16px;
+    margin-bottom: 12px;
+
+    &:last-child {
+      margin-bottom: 4px;
+    }
+
+    &.ant-menu-item-active {
+      background-color: #ffffff29 !important;
+    }
+
+    &.ant-menu-item-selected {
+      background-color: white !important;
+      color: var(--indigo) !important;
+      font-weight: 700;
+    }
+
+    .ant-menu-title-content {
+      padding-left: 32px;
+    }
+  }
+}
+
+.ant-table-thead {
+  .ant-table-cell {
+    background-color: var(--indigo) !important;
+    color: white !important;
+  }
+}
+
+.nav-link {
+  &:hover {
+    background-color: #ffffff2f;
+    color: white;
+  }
+
+  &.active {
+    background-color: white;
+    color: var(--indigo);
+    font-weight: bold;
+  }
 }

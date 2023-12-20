@@ -22,7 +22,7 @@ export function ProductInputForm({
     description: "",
     discount: "",
     product_name: "",
-    store_id: 0,
+    store_id: null,
     avatar: "",
     price: "",
     rate: "0",
@@ -79,11 +79,11 @@ export function ProductInputForm({
     <Form
       name="product"
       labelCol={{ span: 8 }}
-      wrapperCol={{ span: 16 }}
       style={{ maxWidth: 600 }}
       initialValues={data}
       onFinish={onFinish}
       autoComplete="off"
+      className="mt-4"
     >
       <Form.Item<IProduct>
         label="Product Name"
@@ -105,7 +105,6 @@ export function ProductInputForm({
         rules={[{ required: true, message: "Please input store id!" }]}
       >
         <Select
-          defaultValue={0}
           options={storeIdOptions}
           loading={storeIdOptionsLoading}
           disabled={isEdit}

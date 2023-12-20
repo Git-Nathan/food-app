@@ -10,7 +10,9 @@ export interface IAccountLayoutProps {
 export default function AccountLayout({ children }: IAccountLayoutProps) {
   return (
     <PublicAuth>
-      <main>{children}</main>
+      <main className="flex h-[100vh] items-center bg-[#e6e1fe]">
+        {children}
+      </main>
     </PublicAuth>
   );
 }

@@ -15,6 +15,7 @@ import {
 import { IProduct } from "@/models/productModel";
 
 interface IState {
+  openModal: boolean;
   list: IProduct[];
   total: number;
   isLoading: boolean;
@@ -22,6 +23,7 @@ interface IState {
 }
 
 const initialState = {
+  openModal: false,
   list: [],
   total: 0,
   isLoading: false,

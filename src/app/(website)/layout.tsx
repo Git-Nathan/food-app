@@ -1,10 +1,10 @@
 "use client";
 
 import { ProtechedAuth } from "@/auth/ProtechedAuth";
-import { AppSider } from "@/components/AppSider";
 import { AppHeader } from "@/layouts/AppHeader";
+import { AppSider } from "@/layouts/AppSider";
 import { Layout } from "antd";
-import { Content, Header } from "antd/es/layout/layout";
+import { Content } from "antd/es/layout/layout";
 import { ReactNode } from "react";
 
 export interface IMainLayoutProps {
@@ -17,9 +17,7 @@ export default function MainLayout({ children }: IMainLayoutProps) {
       <Layout className="!bg-indigo">
         <AppSider />
         <Layout className="overflow-hidden rounded-l-[50px]">
-          <Header className="!bg-primary-white">
-            <AppHeader />
-          </Header>
+          <AppHeader />
           <Content className="!bg-primary-white">{children}</Content>
         </Layout>
       </Layout>

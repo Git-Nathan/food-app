@@ -17,6 +17,9 @@ module.exports = {
       green: "var(--green)",
       orange: "var(--orange)",
     },
+    fontFamily: {
+      nunito: "Nunito, sans-serif",
+    },
   },
   plugins: [],
 };

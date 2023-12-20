@@ -13,7 +13,7 @@ export function PublicAuth({ children }: IPublicAuthProps) {
     const profile = JSON.parse(localStorage.getItem("profile") as string);
 
     if (profile?.email) {
-      redirect("/");
+      redirect("/products");
     }
 
     setLoading(false);
