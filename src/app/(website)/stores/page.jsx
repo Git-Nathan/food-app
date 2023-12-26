@@ -1,30 +1,34 @@
 "use client";
 
 import { Api } from "@/api/configs";
-import { ProductInputModal } from "@/components/ProductInputModal";
-import { IStore } from "@/models/storeModel";
+import { StoreInputModal } from "@/components/StoreInputModal";
 import { Button, Popconfirm, Rate } from "antd";
-import Table, { ColumnsType } from "antd/es/table";
+import Table from "antd/es/table";
 import Image from "next/image";
 import { useCallback, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
+class Stores {
+  storeList = [];
+
+  setStoreList(data) {
+    this.storeList = data;
+  }
+}
+
 export default function StoresPage() {
   // State
-  const [list, setList] = useState<IStore[]>([]);
-  const [total, setTotal] = useState(0);
+  const [list, setList] = useState([]);
   const [loading, setLoading] = useState(true);
 
   const getAllStores = useCallback(async () => {
     setLoading(true);
 
-    const res: Response = await Api.store.getAllStore();
+    const res = await Api.store.getAllStore();
     if (res.ok) {
       const resData = await res.json();
 
       setList(resData.data);
-
-      setTotal(resData.total);
     } else {
       toast.error("Something went wrong");
     }
@@ -37,7 +41,7 @@ export default function StoresPage() {
   }, [getAllStores]);
 
   // Table
-  const columns: ColumnsType<IStore> = [
+  const columns = [
     {
       title: "ID",
       dataIndex: "store_id",
@@ -156,13 +160,13 @@ export default function StoresPage() {
   ];
 
   // Actions
-  const handleDelete = useCallback((product_id: number) => {}, []);
+  const handleDelete = useCallback((product_id) => {}, []);
 
   return (
     <div className="mt-2 px-10">
       <h2 className="text-base font-bold">Bảng cửa hàng</h2>
       <div className="flex w-full items-center justify-between">
-        <ProductInputModal className="my-4 font-nunito" />
+        <StoreInputModal className="my-4 font-nunito" />
         <Button onClick={() => {}} className="font-nunito">
           Làm mới
         </Button>

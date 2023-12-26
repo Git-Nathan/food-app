@@ -1,13 +1,10 @@
 import { Api } from "@/api/configs";
 import {
   ADD_PRODUCT_FAILURE,
-  ADD_PRODUCT_SUCCESS,
   DELETE_PRODUCT_FAILURE,
-  DELETE_PRODUCT_SUCCESS,
   GET_ALL_PRODUCTS_FAILURE,
   GET_ALL_PRODUCTS_SUCCESS,
   UPDATE_PRODUCT_FAILURE,
-  UPDATE_PRODUCT_SUCCESS,
 } from "@/constants/actionTypes";
 import { IProduct } from "@/models/productModel";
 import { toast } from "react-toastify";
@@ -35,7 +32,11 @@ export function* addProductSaga(action: any) {
 
     if (response.ok) {
       toast.success("Product added successfully");
-      yield put({ type: ADD_PRODUCT_SUCCESS, payload: action.payload });
+      const response: Response = yield call(Api.product.getAllProducts);
+
+      const data: IProduct[] = yield call([response, "json"]);
+
+      yield put({ type: GET_ALL_PRODUCTS_SUCCESS, payload: data });
     } else {
       toast.success("Something went wrong");
     }
@@ -54,7 +55,11 @@ export function* updateProductSaga(action: any) {
 
     if (response.ok) {
       toast.success("Product edited successfully");
-      yield put({ type: UPDATE_PRODUCT_SUCCESS, payload: action.payload });
+      const response: Response = yield call(Api.product.getAllProducts);
+
+      const data: IProduct[] = yield call([response, "json"]);
+
+      yield put({ type: GET_ALL_PRODUCTS_SUCCESS, payload: data });
     } else {
       toast.success("Something went wrong");
     }
@@ -72,7 +77,11 @@ export function* deleteProductSaga(action: any) {
 
     if (response.ok) {
       toast.success("Delete product successfully");
-      yield put({ type: DELETE_PRODUCT_SUCCESS, payload: action.payload });
+      const response: Response = yield call(Api.product.getAllProducts);
+
+      const data: IProduct[] = yield call([response, "json"]);
+
+      yield put({ type: GET_ALL_PRODUCTS_SUCCESS, payload: data });
     } else {
       toast.success("Something went wrong");
     }
