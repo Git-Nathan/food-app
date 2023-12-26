@@ -2,46 +2,54 @@
 
 import { Api } from "@/api/configs";
 import { StoreInputModal } from "@/components/StoreInputModal";
+import { IStore } from "@/models/storeModel";
 import { Button, Popconfirm, Rate } from "antd";
-import Table from "antd/es/table";
+import Table, { ColumnsType } from "antd/es/table";
+import { makeAutoObservable } from "mobx";
+import { observer } from "mobx-react-lite";
 import Image from "next/image";
 import { useCallback, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
 class Stores {
   storeList = [];
+  loading = true;
 
-  setStoreList(data) {
+  constructor() {
+    makeAutoObservable(this);
+  }
+
+  setStoreList(data: any) {
     this.storeList = data;
   }
-}
 
-export default function StoresPage() {
-  // State
-  const [list, setList] = useState([]);
-  const [loading, setLoading] = useState(true);
-
-  const getAllStores = useCallback(async () => {
-    setLoading(true);
+  async getAllStores() {
+    this.loading = true;
 
     const res = await Api.store.getAllStore();
     if (res.ok) {
       const resData = await res.json();
 
-      setList(resData.data);
+      this.storeList = resData.data;
     } else {
       toast.error("Something went wrong");
     }
 
-    setLoading(false);
-  }, []);
+    this.loading = false;
+  }
+}
+
+const storesIntance = new Stores();
+
+function StoresPage() {
+  const [stores] = useState(() => storesIntance);
 
   useEffect(() => {
-    getAllStores();
-  }, [getAllStores]);
+    stores.getAllStores();
+  }, []);
 
   // Table
-  const columns = [
+  const columns: ColumnsType<IStore> = [
     {
       title: "ID",
       dataIndex: "store_id",
@@ -160,21 +168,26 @@ export default function StoresPage() {
   ];
 
   // Actions
-  const handleDelete = useCallback((product_id) => {}, []);
+  const handleDelete = useCallback((product_id: any) => {}, []);
 
   return (
     <div className="mt-2 px-10">
       <h2 className="text-base font-bold">Bảng cửa hàng</h2>
       <div className="flex w-full items-center justify-between">
         <StoreInputModal className="my-4 font-nunito" />
-        <Button onClick={() => {}} className="font-nunito">
+        <Button
+          onClick={() => {
+            stores.getAllStores();
+          }}
+          className="font-nunito"
+        >
           Làm mới
         </Button>
       </div>
       <Table
         columns={columns}
-        dataSource={list}
-        loading={loading}
+        dataSource={stores.storeList}
+        loading={stores.loading}
         size="middle"
         virtual
         scroll={{ x: 1500, y: 600 }}
@@ -183,3 +196,5 @@ export default function StoresPage() {
     </div>
   );
 }
+
+export default observer(StoresPage);
