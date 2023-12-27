@@ -1,11 +1,11 @@
-import { IProduct } from "@/models/productModel";
+import { IStore } from "@/models/storeModel";
 import { Button, Modal } from "antd";
 import { useState } from "react";
-import { ProductInputForm } from "./ProductInputForm";
+import { StoreInputForm } from "./StoreInputForm";
 
 export interface IStoreInputModalProps {
   isEdit?: boolean;
-  data?: IProduct;
+  data?: IStore;
   className?: string;
 }
 
@@ -39,7 +39,7 @@ export function StoreInputModal({
         footer={false}
         destroyOnClose
       >
-        <ProductInputForm
+        <StoreInputForm
           handleCancel={handleCancel}
           data={data}
           isEdit={isEdit}

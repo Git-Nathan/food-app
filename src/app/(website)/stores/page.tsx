@@ -8,7 +8,7 @@ import Table, { ColumnsType } from "antd/es/table";
 import { makeAutoObservable } from "mobx";
 import { observer } from "mobx-react-lite";
 import Image from "next/image";
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
 class Stores {
@@ -21,6 +21,10 @@ class Stores {
 
   setStoreList(data: any) {
     this.storeList = data;
+  }
+
+  setLoading(data: boolean) {
+    this.loading = data;
   }
 
   async getAllStores() {
@@ -39,10 +43,22 @@ class Stores {
   }
 }
 
-const storesIntance = new Stores();
+export const storesIntance = new Stores();
 
 function StoresPage() {
   const [stores] = useState(() => storesIntance);
+
+  const handleDelete = async (store_id: number) => {
+    stores.setLoading(true);
+
+    const res = await Api.store.deleteStore(store_id);
+    if (res.ok) {
+      toast.success("Xóa cửa hàng thành công");
+      stores.getAllStores();
+    }
+
+    stores.setLoading(false);
+  };
 
   useEffect(() => {
     stores.getAllStores();
@@ -149,6 +165,24 @@ function StoresPage() {
       },
     },
     {
+      title: "Giờ mở cửa",
+      dataIndex: "time_open",
+      key: "time_open",
+      width: 1.5,
+      render(value, record, index) {
+        return <p className="truncate-4 w-full">{value}</p>;
+      },
+    },
+    {
+      title: "Giờ đóng cửa",
+      dataIndex: "time_close",
+      key: "time_close",
+      width: 1.5,
+      render(value, record, index) {
+        return <p className="truncate-4 w-full">{value}</p>;
+      },
+    },
+    {
       title: "Tuỳ chọn",
       dataIndex: "actions",
       width: 2,
@@ -156,7 +190,13 @@ function StoresPage() {
       render(value, record, index) {
         return (
           <div key={index}>
-            <Popconfirm title="Sure to delete?" onConfirm={() => {}}>
+            <StoreInputModal isEdit data={record} />
+            <Popconfirm
+              title="Sure to delete?"
+              onConfirm={() => {
+                handleDelete(record.store_id as number);
+              }}
+            >
               <Button className="ml-4" danger>
                 Delete
               </Button>
@@ -166,9 +206,6 @@ function StoresPage() {
       },
     },
   ];
-
-  // Actions
-  const handleDelete = useCallback((product_id: any) => {}, []);
 
   return (
     <div className="mt-2 px-10">
