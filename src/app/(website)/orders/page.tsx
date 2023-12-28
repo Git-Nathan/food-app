@@ -168,7 +168,7 @@ function OrdersPage(props: IOrdersPageProps) {
 
   useEffect(() => {
     ordersStore.getAllStores();
-  }, []);
+  }, [ordersStore]);
 
   return (
     <div className="mt-2 px-10">

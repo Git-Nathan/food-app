@@ -62,7 +62,7 @@ function StoresPage() {
 
   useEffect(() => {
     stores.getAllStores();
-  }, []);
+  }, [stores]);
 
   // Table
   const columns: ColumnsType<IStore> = [

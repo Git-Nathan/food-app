@@ -2,7 +2,7 @@ import { Api } from "@/api/configs";
 import { Rate } from "antd";
 import Table, { ColumnsType } from "antd/es/table";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { IOrderDetail } from "./OrderDetail";
 
@@ -14,7 +14,7 @@ export function OrderDetailTable(props: IOrderDetailTableProps) {
   const [loading, setLoading] = useState(true);
   const [orderDetail, setOrderDetail] = useState<IOrderDetail[]>([]);
 
-  const getOrderDetail = async () => {
+  const getOrderDetail = useCallback(async () => {
     setLoading(true);
 
     const res = await Api.order.getOrder(props.order_id as number);
@@ -27,11 +27,11 @@ export function OrderDetailTable(props: IOrderDetailTableProps) {
       toast.error("Có gì đó sai sai");
     }
     setLoading(false);
-  };
+  }, [props.order_id]);
 
   useEffect(() => {
     getOrderDetail();
-  }, []);
+  }, [getOrderDetail]);
 
   const columns: ColumnsType<IOrderDetail> = [
     {
