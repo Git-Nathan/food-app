@@ -1,14 +1,12 @@
 "use client";
 
-import { Api } from "@/api/configs";
 import { OrderDetail } from "@/components/OrderDetail";
+import { ordersStoreIntance } from "@/mobx/ordersStore";
 import { Button, Table } from "antd";
 import { ColumnsType } from "antd/es/table";
 import dayjs from "dayjs";
-import { makeAutoObservable } from "mobx";
 import { observer } from "mobx-react-lite";
 import { useEffect, useState } from "react";
-import { toast } from "react-toastify";
 
 export interface IOrdersPageProps {}
 
@@ -28,37 +26,6 @@ export interface IOrder {
   phone: string;
   address: string;
 }
-
-class OrdersStore {
-  orderList = [];
-  loading = true;
-
-  constructor() {
-    makeAutoObservable(this);
-  }
-
-  setOrderList(data: any) {
-    this.orderList = data;
-  }
-
-  setLoading(data: boolean) {
-    this.loading = data;
-  }
-
-  async getAllStores() {
-    this.loading = true;
-    const res = await Api.order.getAllOrders();
-    if (res.ok) {
-      const resData = await res.json();
-      this.orderList = resData.data;
-    } else {
-      toast.error("Something went wrong");
-    }
-    this.loading = false;
-  }
-}
-
-export const ordersStoreIntance = new OrdersStore();
 
 function OrdersPage(props: IOrdersPageProps) {
   const [ordersStore] = useState(() => ordersStoreIntance);

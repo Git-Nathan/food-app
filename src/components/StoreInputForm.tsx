@@ -1,5 +1,5 @@
 import { Api } from "@/api/configs";
-import { storesIntance } from "@/app/(website)/stores/page";
+import { storesIntance } from "@/mobx/stores";
 import { IStore } from "@/models/storeModel";
 import { Button, Form, Input, Select, TimePicker } from "antd";
 import TextArea from "antd/es/input/TextArea";
