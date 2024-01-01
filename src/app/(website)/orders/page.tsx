@@ -1,5 +1,6 @@
 "use client";
 
+import { ChangeStatus } from "@/components/ChangeStatus";
 import { OrderDetail } from "@/components/OrderDetail";
 import { ordersStoreIntance } from "@/mobx/ordersStore";
 import { Button, Table } from "antd";
@@ -121,12 +122,13 @@ function OrdersPage(props: IOrdersPageProps) {
     {
       title: "Tuỳ chọn",
       dataIndex: "actions",
-      width: 2,
+      width: 3,
       fixed: "right",
       render(value, record, index) {
         return (
           <div key={index}>
             <OrderDetail order_id={record.order_id} />
+            <ChangeStatus className="ml-2" order_id={record.order_id} />
           </div>
         );
       },
