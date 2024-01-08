@@ -1,6 +1,6 @@
 "use client";
 
-import { Api } from "@/api/configs";
+import { Api, appFetch } from "@/api/configs";
 import { PasswordIcon, UserIcon } from "@/assets/icons";
 import { Button, Form, Input } from "antd";
 import Image from "next/image";
@@ -32,9 +32,14 @@ export default function LoginPage(props: ILoginPageProps) {
       });
 
       if (response.ok) {
-        const { data } = await response.json();
+        const jsonres = await response.json();
 
-        localStorage.setItem("profile", JSON.stringify(data));
+        localStorage.setItem("profile", JSON.stringify(jsonres));
+        appFetch.setConfig({
+          headers: {
+            x_authorization: `${jsonres.accessToken}`,
+          },
+        });
         toast.success("Login successfully");
 
         router.push("/products");

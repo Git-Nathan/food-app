@@ -9,6 +9,11 @@ export class AppFetch {
     this.APIHost = APIHost;
   }
 
+  // Thêm config
+  setConfig(config: RequestInit) {
+    this.config = { ...this.config, ...config };
+  }
+
   async get(url: string, config?: RequestInit) {
     return await fetch(this.APIHost + url, {
       method: "GET",

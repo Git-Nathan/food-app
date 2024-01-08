@@ -12,7 +12,7 @@ export function PublicAuth({ children }: IPublicAuthProps) {
   useEffect(() => {
     const profile = JSON.parse(localStorage.getItem("profile") as string);
 
-    if (profile?.email) {
+    if (profile?.accessToken) {
       redirect("/products");
     }
 
