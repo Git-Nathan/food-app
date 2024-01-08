@@ -38,6 +38,7 @@ export default function LoginPage(props: ILoginPageProps) {
         appFetch.setConfig({
           headers: {
             x_authorization: `${jsonres.accessToken}`,
+            "Content-Type": "application/json",
           },
         });
         toast.success("Login successfully");
